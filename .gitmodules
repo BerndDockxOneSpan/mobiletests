@@ -1,0 +1,3 @@
+[submodule "RelayBoard"]
+	path = RelayBoard
+	url = https://git.onespan.com/digipass/digipass-hardware/tools/python/modules/RelayBoard.git

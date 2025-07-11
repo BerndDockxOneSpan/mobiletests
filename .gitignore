@@ -1,0 +1,5 @@
+.idea
+fail_screenshots/
+.venv/
+__pycache__
+.vscode
