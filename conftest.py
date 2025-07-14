@@ -40,7 +40,7 @@ def driver(request):
 @pytest.fixture(scope='session')
 def relay_board(request) -> RelayBoard:
     """ Connect to a relay board """
-    board = RelayBoard.create_board()
+    board = RelayBoard.create_board(3)
     yield board
     board.close()
 
