@@ -8,6 +8,7 @@ applyTo: "**"
 ### 1. Fetch Jira Tasks
 Use the Atlassian MCP Server to retrieve Jira tasks. If MCP server is unavailable, request task list from user. If user cannot provide tasks, create placeholder tasks based on project scope and request prioritization guidance.
 - Prioritize tasks based on business value (High/Medium/Low impact) and dependencies (blocking/blocked relationships)
+- When user requests test case ideas, refer to and follow the instructions in the "Python-test-ideas-instructions.md" file for detailed test case idea generation guidance
 - Ensure tasks are well-defined with clear acceptance criteria (SMART: Specific, Measurable, Achievable, Relevant, Time-bound)
 - Break down large tasks (>8 hours estimated effort) into smaller, manageable sub-tasks (<4 hours each)
 - Use consistent labels for categorization: bug, feature, enhancement, tech-debt, documentation
