@@ -1,0 +1,108 @@
+<testsuite name="digipass_fx7.authentication.DIGIPASS FX7 Authentication" tests="6" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-07-14T12:20:10.394340" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Successful authentication with valid PIN" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication
+  Scenario: Successful authentication with valid PIN
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    Given I enter username "registered_user" ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I enter the correct PIN on the device ... untested in 0.000s
+    And I provide user presence on the device ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    And I should be logged in ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Authentication fails with wrong PIN" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @error
+  Scenario: Authentication fails with wrong PIN
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    Given I enter username "registered_user" ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I enter an incorrect PIN on the device ... untested in 0.000s
+    Then the authentication should fail ... untested in 0.000s
+    And I should see a PIN error message ... untested in 0.000s
+    When I enter the correct PIN on the device ... untested in 0.000s
+    And I provide user presence on the device ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Authentication times out during user presence" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @timeout
+  Scenario: Authentication times out during user presence
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    Given I enter username "registered_user" ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I enter the correct PIN on the device ... untested in 0.000s
+    But I do not provide user presence within 30 seconds ... untested in 0.000s
+    Then the authentication should timeout ... untested in 0.000s
+    And I should see a timeout error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Authentication fails when no credential exists" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @no_credential
+  Scenario: Authentication fails when no credential exists
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    Given I enter username "unregistered_user" ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    Then the authentication should fail immediately ... untested in 0.000s
+    And I should see a "no credentials found" error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Successful discoverable credential authentication" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @discoverable
+  Scenario: Successful discoverable credential authentication
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    When I click the authenticate button without entering username ... untested in 0.000s
+    And I select the correct credential from the list ... untested in 0.000s
+    And I enter the correct PIN on the device ... untested in 0.000s
+    And I provide user presence on the device ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    And I should be logged in ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="User cancels authentication during PIN entry" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @cancel
+  Scenario: User cancels authentication during PIN entry
+    Given I have a DIGIPASS FX7 device with registered credentials ... untested in 0.000s
+    And I am on the WebAuthn authentication page ... untested in 0.000s
+    Given I enter username "registered_user" ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I cancel the PIN entry ... untested in 0.000s
+    Then the authentication should be cancelled ... untested in 0.000s
+    And I should see a cancellation error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

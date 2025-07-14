@@ -1,0 +1,92 @@
+<testsuite name="digipass_fx7.registration.DIGIPASS FX7 Registration" tests="5" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-07-14T12:20:10.427780" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Successful registration with valid PIN" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration
+  Scenario: Successful registration with valid PIN
+    Given I have a DIGIPASS FX7 device connected ... untested in 0.000s
+    And I am on the WebAuthn registration page ... untested in 0.000s
+    Given I enter username "test_user_001" ... untested in 0.000s
+    When I click the register button ... untested in 0.000s
+    And I enter the correct PIN on the device ... untested in 0.000s
+    And I provide user presence on the device ... untested in 0.000s
+    Then the registration should succeed ... untested in 0.000s
+    And I should see a success message ... untested in 0.000s
+    And the credential should be stored on the device ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Registration fails with wrong PIN" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @error
+  Scenario: Registration fails with wrong PIN
+    Given I have a DIGIPASS FX7 device connected ... untested in 0.000s
+    And I am on the WebAuthn registration page ... untested in 0.000s
+    Given I enter username "test_user_002" ... untested in 0.000s
+    When I click the register button ... untested in 0.000s
+    And I enter an incorrect PIN on the device ... untested in 0.000s
+    Then the registration should fail ... untested in 0.000s
+    And I should see a PIN error message ... untested in 0.000s
+    And no credential should be stored ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Device locks after maximum PIN attempts" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @pin_lockout
+  Scenario: Device locks after maximum PIN attempts
+    Given I have a DIGIPASS FX7 device connected ... untested in 0.000s
+    And I am on the WebAuthn registration page ... untested in 0.000s
+    Given I enter username "test_user_003" ... untested in 0.000s
+    When I click the register button ... untested in 0.000s
+    And I enter incorrect PIN 3 times consecutively ... undefined in 0.000s
+    Then the device should require USB re-insertion ... untested in 0.000s
+    When I enter incorrect PIN 8 times total ... undefined in 0.000s
+    Then the device should be permanently locked ... untested in 0.000s
+    And I should see a lockout error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Registration times out during user presence" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @timeout
+  Scenario: Registration times out during user presence
+    Given I have a DIGIPASS FX7 device connected ... untested in 0.000s
+    And I am on the WebAuthn registration page ... untested in 0.000s
+    Given I enter username "test_user_004" ... untested in 0.000s
+    When I click the register button ... untested in 0.000s
+    And I enter the correct PIN on the device ... untested in 0.000s
+    But I do not provide user presence within 30 seconds ... untested in 0.000s
+    Then the registration should timeout ... untested in 0.000s
+    And I should see a timeout error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="User cancels PIN entry during registration" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @cancel
+  Scenario: User cancels PIN entry during registration
+    Given I have a DIGIPASS FX7 device connected ... untested in 0.000s
+    And I am on the WebAuthn registration page ... untested in 0.000s
+    Given I enter username "test_user_005" ... untested in 0.000s
+    When I click the register button ... untested in 0.000s
+    And I cancel the PIN entry ... untested in 0.000s
+    Then the registration should be cancelled ... untested in 0.000s
+    And I should see a cancellation error message ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
