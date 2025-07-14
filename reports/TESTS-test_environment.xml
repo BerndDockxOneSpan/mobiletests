@@ -1,0 +1,31 @@
+<testsuite name="test_environment.BDD Framework Test" tests="1" errors="1" failures="0" skipped="0" time="0.005001" timestamp="2025-07-14T15:01:29.368581" hostname="LAP-BE-DOCKXBE1"><testcase classname="test_environment.BDD Framework Test" name="Environment setup test" status="failed" time="0.005001"><error type="RuntimeError" message="WebAuthn utility not initialized">
+<![CDATA[
+Failing step: Given I enter username "test_user" ... failed in 0.005s
+Location: features/test_environment.feature:7
+Traceback (most recent call last):
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\webauthn_steps.py", line 43, in step_enter_username
+    raise RuntimeError("WebAuthn utility not initialized")
+RuntimeError: WebAuthn utility not initialized
+
+Captured logging:
+INFO     builtins: Navigating to WebAuthn registration page
+INFO     builtins: Test scenario - skipping actual page navigation
+INFO     builtins: Entering username: test_user]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @test @debug
+  Scenario: Environment setup test
+    Given I am on the WebAuthn registration page ... passed in 0.000s
+    Given I enter username "test_user" ... failed in 0.005s
+    Then I should see the page is loaded ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

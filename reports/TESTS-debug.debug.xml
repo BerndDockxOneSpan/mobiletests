@@ -1,13 +1,13 @@
-<testsuite name="digipass_fx7.authentication.DIGIPASS FX7 Authentication" tests="1" errors="1" failures="0" skipped="0" time="1.034642" timestamp="2025-07-14T14:49:24.953550" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.authentication.DIGIPASS FX7 Authentication" name="Successful authentication with valid PIN" status="failed" time="1.034642"><error type="NoSuchContextException" message="Message: No such context found.&#10;Stacktrace:&#10;NoSuchContextError: No such context found.&#10;    at AndroidUiautomator2Driver.setContext (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\context\exports.js:66:11)">
+<testsuite name="debug.debug.WebAuthn Debug" tests="1" errors="1" failures="0" skipped="0" time="1.816583" timestamp="2025-07-14T15:04:57.377889" hostname="LAP-BE-DOCKXBE1"><testcase classname="debug.debug.WebAuthn Debug" name="Debug registration flow" status="failed" time="1.816583"><error type="NoSuchContextException" message="Message: No such context found.&#10;Stacktrace:&#10;NoSuchContextError: No such context found.&#10;    at AndroidUiautomator2Driver.setContext (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\context\exports.js:66:11)">
 <![CDATA[
-Failing step: Given I enter username "registered_user" ... failed in 0.597s
-Location: features/digipass_fx7/authentication.feature:12
+Failing step: Given I enter username "debug_test" ... failed in 0.314s
+Location: features/debug/debug.feature:10
 Traceback (most recent call last):
   File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\model.py", line 1329, in run
     match.run(runner.context)
   File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
     self.func(context, *args, **kwargs)
-  File "features\steps\webauthn_steps.py", line 35, in step_enter_username
+  File "features\steps\webauthn_steps.py", line 41, in step_enter_username
     context.wa_util.fill_username(username=username)
   File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\webauthn\webauthn_util.py", line 18, in fill_username
     self.controller.find_element(WebAuthnLocators.USERNAME_BOX).send_keys(username)
@@ -29,23 +29,20 @@ NoSuchContextError: No such context found.
 
 Captured logging:
 INFO     builtins: DIGIPASS FX7 device verified as connected
-INFO     builtins: DIGIPASS FX7 device has registered credentials
-INFO     builtins: Navigating to WebAuthn authentication page
-INFO     builtins: Entering username: registered_user]]>
+INFO     builtins: Navigating to WebAuthn registration page
+INFO     builtins: Entering username: debug_test]]>
 </error><system-out>
 <![CDATA[
 @scenario.begin
 
-  @hardware @authentication
-  Scenario: Successful authentication with valid PIN
-    Given I have a DIGIPASS FX7 device with registered credentials ... passed in 0.003s
-    And I am on the WebAuthn authentication page ... passed in 0.435s
-    Given I enter username "registered_user" ... failed in 0.597s
-    When I click the authenticate button ... skipped in 0.000s
-    And I enter the correct PIN on the device ... skipped in 0.000s
-    And I provide user presence on the device ... skipped in 0.000s
-    Then the authentication should succeed ... skipped in 0.000s
-    And I should be logged in ... skipped in 0.000s
+  @debug @hardware @registration
+  Scenario: Debug registration flow
+    Given I have a DIGIPASS FX7 device connected ... passed in 0.000s
+    And I am on the WebAuthn registration page ... passed in 1.502s
+    Given I enter username "debug_test" ... failed in 0.314s
+    When I click the register button with debug ... skipped in 0.000s
+    And I wait for hardware authenticator popup ... skipped in 0.000s
+    Then the registration should succeed ... skipped in 0.000s
 
 @scenario.end
 --------------------------------------------------------------------------------

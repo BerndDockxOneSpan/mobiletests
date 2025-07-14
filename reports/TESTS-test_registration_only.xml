@@ -1,0 +1,65 @@
+<testsuite name="test_registration_only.Test Registration Flow Only" tests="1" errors="1" failures="0" skipped="0" time="20.487822" timestamp="2025-07-14T15:50:38.272371" hostname="LAP-BE-DOCKXBE1"><testcase classname="test_registration_only.Test Registration Flow Only" name="Test hardware registration flow method" status="failed" time="20.487822"><error type="TimeoutException" message="Message: &#10;Stacktrace:&#10;NoSuchElementError: An element could not be located on the page using the given search parameters.&#10;    at AndroidUiautomator2Driver.findElOrEls (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)&#10;    at processTicksAndRejections (node:internal/process/task_queues:105:5)&#10;    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)&#10;    at AndroidUiautomator2Driver.findElement (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)">
+<![CDATA[
+Failing step: When I complete the hardware registration flow ... failed in 13.994s
+Location: features/test_registration_only.feature:10
+Traceback (most recent call last):
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\webauthn_steps.py", line 509, in step_complete_hardware_registration
+    context.pk_util.do_registration_flow()
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\passkey_util.py", line 71, in do_registration_flow
+    self.wait_for_user_presence_request()
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\passkey_util.py", line 127, in wait_for_user_presence_request
+    self.controller.wait_for_element(PasskeyLocators.CONNECT_KEY)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\appium_util.py", line 84, in wait_for_element
+    return self.wait_for(expected_conditions.presence_of_element_located((locator.by, locator.value)), timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\appium_util.py", line 79, in wait_for
+    return WebDriverWait(self.driver, timeout).until(condition)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\selenium\webdriver\support\wait.py", line 138, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+
+Captured logging:
+INFO     builtins: DIGIPASS FX7 device verified as connected
+INFO     builtins: Navigating to WebAuthn registration page
+INFO     builtins: Entering username: test_reg_flow
+INFO     builtins: Available contexts: ['NATIVE_APP', 'CHROMIUM']
+INFO     builtins: Switching to web context: CHROMIUM
+INFO     builtins: Clicking register button
+INFO     builtins: Waiting for WebAuthn API to initialize...
+INFO     builtins: Completing hardware registration flow
+ERROR    builtins: ❌ Failed to complete hardware registration flow: Message: 
+Stacktrace:
+NoSuchElementError: An element could not be located on the page using the given search parameters.
+    at AndroidUiautomator2Driver.findElOrEls (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\find.ts:86:11)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at AndroidUiautomator2Driver.findElOrElsWithProcessing (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:60:12)
+    at AndroidUiautomator2Driver.findElement (C:\Users\x_dockxbe1\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\lib\basedriver\commands\find.ts:75:12)
+INFO     builtins: Screenshot saved: registration_flow_error.png]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @browser
+  Scenario: Test hardware registration flow method
+    Given I have a DIGIPASS FX7 device connected ... passed in 0.001s
+    And I am on the WebAuthn registration page ... passed in 0.340s
+    And I enter username "test_reg_flow" ... passed in 2.731s
+    When I click the register button ... passed in 3.423s
+    When I complete the hardware registration flow ... failed in 13.994s
+    Then the registration should succeed ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

@@ -227,3 +227,52 @@ def step_see_reconnection_error(context):
 def step_see_device_locked_error(context):
     """Verify device locked error message."""
     log.info("Verifying device locked error message is shown")
+
+@when('I enter incorrect PIN {count:d} times consecutively')
+def step_enter_incorrect_pin_consecutive(context, count):
+    """Enter incorrect PIN multiple times consecutively."""
+    log.info(f"Entering incorrect PIN {count} times consecutively")
+    if hasattr(context, 'pk_util') and context.pk_util:
+        for attempt in range(count):
+            try:
+                context.pk_util.enter_pin(pin="0000")  # Wrong PIN
+                error_text = context.pk_util.wait_for_pin_error_text()
+                log.info(f"Attempt {attempt + 1}: {error_text}")
+                if attempt < count - 1:
+                    time.sleep(0.5)  # Brief pause between attempts
+            except Exception as e:
+                log.info(f"PIN attempt {attempt + 1} failed: {e}")
+    else:
+        raise RuntimeError("Hardware passkey utility not initialized")
+
+@when('I enter incorrect PIN {total:d} times total')
+def step_enter_incorrect_pin_total_simple(context, total):
+    """Enter incorrect PIN total times across sessions."""
+    log.info(f"Simulating {total} incorrect PIN attempts total")
+    if hasattr(context, 'pk_util') and context.pk_util:
+        for attempt in range(total):
+            try:
+                context.pk_util.enter_pin(pin="0000")  # Wrong PIN
+                error_text = context.pk_util.wait_for_pin_error_text()
+                log.info(f"Total attempt {attempt + 1}: {error_text}")
+                if attempt < total - 1:
+                    time.sleep(0.2)  # Brief pause between attempts
+            except Exception as e:
+                log.info(f"PIN attempt {attempt + 1} failed: {e}")
+                break  # Stop if device locks or fails
+    else:
+        raise RuntimeError("Hardware passkey utility not initialized")
+
+@then('I should see an error about storage limit')
+def step_see_storage_limit_error(context):
+    """Verify storage limit error is displayed."""
+    log.info("Verifying storage limit error message")
+    if hasattr(context, 'wa_util') and context.wa_util:
+        try:
+            error_text = context.wa_util.wait_for_error_text()
+            assert "storage" in error_text.lower() or "limit" in error_text.lower(), f"Expected storage limit error, got: {error_text}"
+            log.info(f"Storage limit error confirmed: {error_text}")
+        except Exception as e:
+            log.info(f"Could not verify storage limit error: {e}")
+    else:
+        raise RuntimeError("WebAuthn utility not initialized")

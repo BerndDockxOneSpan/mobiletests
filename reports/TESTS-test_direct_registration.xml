@@ -1,0 +1,51 @@
+<testsuite name="test_direct_registration.Test Registration Flow Directly" tests="1" errors="1" failures="0" skipped="0" time="4.184419" timestamp="2025-07-14T15:43:30.013187" hostname="LAP-BE-DOCKXBE1"><testcase classname="test_direct_registration.Test Registration Flow Directly" name="Test hardware registration flow method directly" status="failed" time="4.184419"><error type="NoSuchContextException" message="Message: No such context found.&#10;Stacktrace:&#10;NoSuchContextError: No such context found.&#10;    at AndroidUiautomator2Driver.setContext (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\context\exports.js:66:11)">
+<![CDATA[
+Failing step: When I click the register button directly ... failed in 2.775s
+Location: features/test_direct_registration.feature:8
+Traceback (most recent call last):
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\model.py", line 1329, in run
+    match.run(runner.context)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\behave\matchers.py", line 98, in run
+    self.func(context, *args, **kwargs)
+  File "features\steps\webauthn_steps.py", line 577, in step_click_register_button_directly
+    context.wa_util.click_register_button()
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\webauthn\webauthn_util.py", line 22, in click_register_button
+    self.controller.find_element(WebAuthnLocators.REGISTER_BUTTON).click()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\appium_util.py", line 55, in find_element
+    self.switch_context(locator.context)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\shared\appium_util.py", line 50, in switch_context
+    self.driver.switch_to.context(context.value)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\appium\webdriver\switch_to.py", line 40, in context
+    self._driver.execute(MobileCommand.SWITCH_TO_CONTEXT, {'name': context_name})
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\selenium\webdriver\remote\webdriver.py", line 454, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\x_dockxbe1\Downloads\mobiletests\mobiletests-master\.venv\Lib\site-packages\appium\webdriver\errorhandler.py", line 125, in check_response
+    raise exception_class(msg=message, stacktrace=format_stacktrace(stacktrace))
+appium.common.exceptions.NoSuchContextException: Message: No such context found.
+Stacktrace:
+NoSuchContextError: No such context found.
+    at AndroidUiautomator2Driver.setContext (C:\Users\x_dockxbe1\.appium\node_modules\appium-uiautomator2-driver\node_modules\appium-android-driver\lib\commands\context\exports.js:66:11)
+
+Captured logging:
+INFO     builtins: DIGIPASS FX7 device verified as connected
+INFO     builtins: Navigating to WebAuthn registration page
+INFO     builtins: Clicking register button directly (no username)
+INFO     builtins: Available contexts: ['NATIVE_APP']
+WARNING  builtins: No web context found, trying to use existing context]]>
+</error><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @registration @direct
+  Scenario: Test hardware registration flow method directly
+    Given I have a DIGIPASS FX7 device connected ... passed in 0.001s
+    And I am on the WebAuthn registration page ... passed in 1.409s
+    When I click the register button directly ... failed in 2.775s
+    And I complete the hardware registration flow ... skipped in 0.000s
+    Then the registration should succeed ... skipped in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>
