@@ -6,36 +6,27 @@ log = logging.getLogger(__name__)
 
 @given('I have a DIGIPASS FX7 device connected')
 def step_device_connected(context):
-    """Verify device is connected and ready."""
-    # This would typically check hardware connection
-    # For now, we'll assume the device is connected via the relay board
     assert hasattr(context, 'relay_board'), "Relay board not initialized"
     log.info("DIGIPASS FX7 device verified as connected")
 
 @given('I have a DIGIPASS FX7 device with registered credentials')
 def step_device_with_credentials(context):
-    """Verify device has registered credentials."""
     context.execute_steps('''
         Given I have a DIGIPASS FX7 device connected
     ''')
-    # For BDD tests, we assume credentials exist or register them
     log.info("DIGIPASS FX7 device has registered credentials")
 
 @given('the device has no PIN set')
 def step_device_no_pin(context):
-    """Verify device has no PIN configured."""
-    # This would check the device state
     log.info("Device verified to have no PIN set")
 
 @given('the device has a PIN set to "{pin}"')
 def step_device_has_pin(context, pin):
-    """Verify device has specific PIN set."""
     context.current_pin = pin
     log.info(f"Device verified to have PIN set to {pin}")
 
 @when('I enter the correct PIN on the device')
 def step_enter_correct_pin(context):
-    """Enter the correct PIN on the device."""
     pin = getattr(context, 'current_pin', '1234')
     log.info(f"Entering correct PIN: {pin}")
     if hasattr(context, 'pk_util') and context.pk_util:
@@ -45,7 +36,6 @@ def step_enter_correct_pin(context):
 
 @when('I enter an incorrect PIN on the device')
 def step_enter_incorrect_pin(context):
-    """Enter an incorrect PIN on the device."""
     log.info("Entering incorrect PIN")
     if hasattr(context, 'pk_util') and context.pk_util:
         context.pk_util.enter_pin(pin="wrong_pin")
@@ -54,13 +44,11 @@ def step_enter_incorrect_pin(context):
 
 @when('I enter incorrect PIN "{pin}" {count:d} times consecutively')
 def step_enter_incorrect_pin_multiple(context, pin, count):
-    """Enter incorrect PIN multiple times."""
     log.info(f"Entering incorrect PIN {pin} {count} times consecutively")
     for attempt in range(count):
-        # pk_util.enter_pin(pin=pin)
         log.info(f"Attempt {attempt + 1} with incorrect PIN")
         if attempt < count - 1:
-            time.sleep(0.5)  # Brief pause between attempts
+            time.sleep(0.5)
 
 @when('I enter incorrect PIN across multiple sessions totaling {total:d} attempts')
 def step_enter_incorrect_pin_total(context, total):
