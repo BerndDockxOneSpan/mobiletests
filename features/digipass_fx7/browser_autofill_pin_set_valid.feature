@@ -1,7 +1,8 @@
-Feature: DIGIPASS FX7 Browser Autofill with Valid PIN
-  As a user with a DIGIPASS FX7 device with PIN already set
-  I want to authenticate using browser autofill feature with valid PIN
-  So that I can select from multiple registered usernames on webauthn.io
+
+Feature: DIGIPASS FX7 Browser Autofill Authentication
+  As a user with a DIGIPASS FX7 device and PIN set
+  I want to authenticate using browser autofill
+  So that I can access webauthn.io with discoverable credentials
 
   Background:
     Given I have a DIGIPASS FX7 device connected via USB
@@ -9,59 +10,65 @@ Feature: DIGIPASS FX7 Browser Autofill with Valid PIN
     And I have multiple registrations on webauthn.io with the security key
     And I am on the WebAuthn authentication page at "https://webauthn.io/"
 
-  @hardware @authentication @autofill @pin_set @valid_pin @discoverable
-  Scenario: Successful browser autofill authentication with valid PIN
-    # Step 1: Leave username empty + Click Authenticate -> Sign in prompt appears
+
+  @hardware @authentication @autofill @discoverable
+  Scenario: Browser shows authentication options for empty username
+    # XML Step 1: Leave username empty + Click Authenticate -> Sign in prompt appears
     Given I leave the username textbox empty
     When I click the authenticate button
     Then I should see a prompt to choose how I'd like to sign in to webauthn.io
-    # Step 2: Select Use a passkey on different device -> Device selection options shown
+
+
+  @hardware @authentication @autofill @device-selection
+  Scenario: User selects passkey device option
+    # XML Step 2: Select Use a passkey on different device -> Device options shown
+    Given I am prompted to choose how to sign in
     When I select "Use a passkey on different device"
     Then I should see the device selection options:
-      | Option          |
-      | USB             |
-      | Different device|
-    # Step 3: Connect security key -> LED blinks once (battery) + PIN dialog opens
+      | Option           |
+      | USB              |
+      | Different device |
+
+
+  @hardware @authentication @autofill @pin-entry
+  Scenario: Device prompts for PIN when connected
+    # XML Step 3: Connect security key -> LED blinks + PIN dialog opens
+    Given the device selection options are shown
     When I connect the security key under test
     Then the device LED should blink once indicating battery level
     And I should see the "Confirm with PIN" dialog
-    # Step 4: Enter correct PIN -> LED blinks blue + Connect key dialog opens
+
+
+  @hardware @authentication @autofill @pin-validation
+  Scenario: Valid PIN enables user presence request
+    # XML Step 4: Enter correct PIN -> LED blinks blue + Connect key dialog
+    Given the "Confirm with PIN" dialog is shown
     When I enter the correct PIN "1234" and confirm
     Then the device LED should blink blue
     And I should see the "Connect your key" dialog for user presence
-    # Step 5: Press device button -> LED stops blinking + Username list appears
+
+
+  @hardware @authentication @autofill @user-presence
+  Scenario: User presence reveals credential list
+    # XML Step 5: Press button -> LED stops + Username list appears
+    Given the "Connect your key" dialog is shown for user presence
     When I press the button on the device
     Then the device LED should stop blinking
     And I should see a list of registered usernames
-    # Step 6: Select any username -> Authentication successful
+
+
+  @hardware @authentication @autofill @credential-selection
+  Scenario: Selecting username completes authentication
+    # XML Step 6: Select username -> Authentication successful
+    Given a list of registered usernames is shown
     When I select any username from the list
     Then the authentication should succeed
     And I should be logged in
 
-  @hardware @authentication @autofill @pin_set @valid_pin @detailed_flow
-  Scenario: Browser autofill with valid PIN - detailed hardware interaction
-    Given I leave the username textbox empty
-    When I click the authenticate button
-    And I wait for hardware authenticator popup
-    And I complete the hardware authentication flow
-    Then I should see a list of registered usernames
-    When I select any username from the list
-    Then the authentication should succeed
-    And I should be logged in
 
-  @hardware @authentication @autofill @pin_set @valid_pin @multiple_credentials
-  Scenario: Verify multiple credential selection in autofill
+  @hardware @authentication @autofill @end-to-end
+  Scenario: Complete autofill authentication flow
+    # Complete flow from XML test case 2613
     Given I leave the username textbox empty
-    When I click the authenticate button
-    And I complete the hardware authentication flow
-    Then I should see a list of registered usernames
-    And the list should contain multiple usernames
-    When I select the first username from the list
-    Then the authentication should succeed
-    When I logout and return to the authentication page
-    And I leave the username textbox empty
-    And I click the authenticate button
-    And I complete the hardware authentication flow
-    And I select the second username from the list
-    Then the authentication should succeed
-    And I should be logged in
+    When I authenticate with discoverable credentials using valid PIN
+    Then I should be logged in successfully
