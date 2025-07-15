@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="2411395" name="Registration | PIN Set | Valid PIN">
+	<node_order><![CDATA[0]]></node_order>
+	<externalid><![CDATA[2611]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	Validate that user can successfully register the device with correct PIN<br />
+	<span style="color:#ff0000;">Chrome v135.0.7049.100 NA</span></p>
+]]></summary>
+	<preconditions><![CDATA[<ul>
+	<li>
+		PIN is set</li>
+	<li>
+		Connection: USB(available, but security is not conncted)</li>
+	<li>
+		Device is not yet registered&nbsp;<br />
+		<br />
+		<span style="color:#ffffff;"><span style="background-color: rgb(0, 0, 0);">START:&nbsp;</span></span>&nbsp;open&nbsp;<a href="https://webauthn.io/">Webauthn.io</a></li>
+</ul>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	Enter username</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Username is entered</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	Click <strong>Register&nbsp;</strong>button</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Sign in options dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	Select&nbsp;<strong>More options</strong></p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Choose device for a passkey:<br />
+	NFC<br />
+	USB<br />
+	Different device</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	Select USB security key</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	&nbsp;Connect your key dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[5]]></step_number>
+	<actions><![CDATA[<p>
+	Connect Security Key</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	- LED blinks once (battery level)<br />
+	- Confirm with PIN dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[6]]></step_number>
+	<actions><![CDATA[<p>
+	Provide correct PIN &gt; Confirm&nbsp;</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	LED is blinking&nbsp;<span style="color:#0000ff;">BLUE</span><br />
+	Connect you key dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[7]]></step_number>
+	<actions><![CDATA[<p>
+	Press on the Security key button</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Registration succeessful</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

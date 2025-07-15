@@ -1,4 +1,4 @@
-<testsuite name="digipass_fx7.registration.DIGIPASS FX7 Registration" tests="5" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-07-14T14:48:51.278261" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Successful registration with valid PIN" status="untested" time="0"><system-out>
+<testsuite name="digipass_fx7.registration.DIGIPASS FX7 Registration" tests="5" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-07-15T11:40:38.004290" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.registration.DIGIPASS FX7 Registration" name="Successful registration with valid PIN" status="untested" time="0"><system-out>
 <![CDATA[
 @scenario.begin
 

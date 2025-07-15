@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testcases>
+<testcase internalid="2411413" name="Browser Autofill | PIN set | Valid PIN">
+	<node_order><![CDATA[2]]></node_order>
+	<externalid><![CDATA[2613]]></externalid>
+	<version><![CDATA[1]]></version>
+	<summary><![CDATA[<p>
+	Validate that user can authenticate using browser autofill feature with correct PIN</p>
+]]></summary>
+	<preconditions><![CDATA[<ul>
+	<li>
+		PIN is set</li>
+	<li>
+		Connection: USB&nbsp;</li>
+	<li>
+		Multiple registrations on webauthn.io are done with security key under test<br />
+		<br />
+		<span style="color:#ffffff;"><span style="background-color: rgb(0, 0, 0);">START:&nbsp;</span></span>&nbsp;open&nbsp;<a href="https://webauthn.io/">Webauthn.io</a></li>
+</ul>
+]]></preconditions>
+	<execution_type><![CDATA[1]]></execution_type>
+	<importance><![CDATA[2]]></importance>
+	<estimated_exec_duration></estimated_exec_duration>
+	<status>1</status>
+<steps>
+<step>
+	<step_number><![CDATA[1]]></step_number>
+	<actions><![CDATA[<p>
+	Leave the username textbox empty &gt; Click the <strong>Authenticate</strong> button</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	A prompt to choose how you&#39;d like to sign in to webauthn.io appears</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[2]]></step_number>
+	<actions><![CDATA[<p>
+	Select <strong>Use a passkey on different device</strong></p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Choose device with a passkey:<br />
+	USB<br />
+	Different device</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[3]]></step_number>
+	<actions><![CDATA[<p>
+	Connect the security key under test</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	- LED blinks once (battery level)<br />
+	- Confirm with PIN dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[4]]></step_number>
+	<actions><![CDATA[<p>
+	Enter a correct PIN &gt; <strong>Confirm</strong></p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	- LED is blinking&nbsp;<span style="color: rgb(0, 0, 255);">BLUE</span><br />
+	- Connect you key dialog opens</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[5]]></step_number>
+	<actions><![CDATA[<p>
+	Press the button on the device</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	- LED stops blinking<br />
+	- List of registered username appears</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+
+<step>
+	<step_number><![CDATA[6]]></step_number>
+	<actions><![CDATA[<p>
+	Select any username</p>
+]]></actions>
+	<expectedresults><![CDATA[<p>
+	Authentication successful</p>
+]]></expectedresults>
+	<execution_type><![CDATA[1]]></execution_type>
+</step>
+</steps>
+</testcase>
+</testcases>

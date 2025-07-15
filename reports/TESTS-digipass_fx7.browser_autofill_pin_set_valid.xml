@@ -1,0 +1,85 @@
+<testsuite name="digipass_fx7.browser_autofill_pin_set_valid.DIGIPASS FX7 Browser Autofill with Valid PIN" tests="3" errors="0" failures="0" skipped="0" time="0.0" timestamp="2025-07-15T11:40:37.905875" hostname="LAP-BE-DOCKXBE1"><testcase classname="digipass_fx7.browser_autofill_pin_set_valid.DIGIPASS FX7 Browser Autofill with Valid PIN" name="Successful browser autofill authentication with valid PIN" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @autofill @pin_set @valid_pin @discoverable
+  Scenario: Successful browser autofill authentication with valid PIN
+    Given I have a DIGIPASS FX7 device connected via USB ... untested in 0.000s
+    And the device has a PIN set to "1234" ... untested in 0.000s
+    And I have multiple registrations on webauthn.io with the security key ... untested in 0.000s
+    And I am on the WebAuthn authentication page at "https://webauthn.io/" ... untested in 0.000s
+    Given I leave the username textbox empty ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    Then I should see a prompt to choose how I'd like to sign in to webauthn.io ... untested in 0.000s
+    When I select "Use a passkey on different device" ... untested in 0.000s
+    Then I should see the device selection options ... untested in 0.000s
+      | Option           |
+      | USB              |
+      | Different device |
+    When I connect the security key under test ... untested in 0.000s
+    Then the device LED should blink once indicating battery level ... untested in 0.000s
+    And I should see the "Confirm with PIN" dialog ... untested in 0.000s
+    When I enter the correct PIN "1234" and confirm ... untested in 0.000s
+    Then the device LED should blink blue ... untested in 0.000s
+    And I should see the "Connect your key" dialog for user presence ... untested in 0.000s
+    When I press the button on the device ... untested in 0.000s
+    Then the device LED should stop blinking ... untested in 0.000s
+    And I should see a list of registered usernames ... untested in 0.000s
+    When I select any username from the list ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    And I should be logged in ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.browser_autofill_pin_set_valid.DIGIPASS FX7 Browser Autofill with Valid PIN" name="Browser autofill with valid PIN - detailed hardware interaction" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @autofill @pin_set @valid_pin @detailed_flow
+  Scenario: Browser autofill with valid PIN - detailed hardware interaction
+    Given I have a DIGIPASS FX7 device connected via USB ... untested in 0.000s
+    And the device has a PIN set to "1234" ... untested in 0.000s
+    And I have multiple registrations on webauthn.io with the security key ... untested in 0.000s
+    And I am on the WebAuthn authentication page at "https://webauthn.io/" ... untested in 0.000s
+    Given I leave the username textbox empty ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I wait for hardware authenticator popup ... untested in 0.000s
+    And I complete the hardware authentication flow ... untested in 0.000s
+    Then I should see a list of registered usernames ... untested in 0.000s
+    When I select any username from the list ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    And I should be logged in ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase><testcase classname="digipass_fx7.browser_autofill_pin_set_valid.DIGIPASS FX7 Browser Autofill with Valid PIN" name="Verify multiple credential selection in autofill" status="untested" time="0"><system-out>
+<![CDATA[
+@scenario.begin
+
+  @hardware @authentication @autofill @pin_set @valid_pin @multiple_credentials
+  Scenario: Verify multiple credential selection in autofill
+    Given I have a DIGIPASS FX7 device connected via USB ... untested in 0.000s
+    And the device has a PIN set to "1234" ... untested in 0.000s
+    And I have multiple registrations on webauthn.io with the security key ... untested in 0.000s
+    And I am on the WebAuthn authentication page at "https://webauthn.io/" ... untested in 0.000s
+    Given I leave the username textbox empty ... untested in 0.000s
+    When I click the authenticate button ... untested in 0.000s
+    And I complete the hardware authentication flow ... untested in 0.000s
+    Then I should see a list of registered usernames ... untested in 0.000s
+    And the list should contain multiple usernames ... untested in 0.000s
+    When I select the first username from the list ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    When I logout and return to the authentication page ... untested in 0.000s
+    And I leave the username textbox empty ... undefined in 0.000s
+    And I click the authenticate button ... untested in 0.000s
+    And I complete the hardware authentication flow ... untested in 0.000s
+    And I select the second username from the list ... untested in 0.000s
+    Then the authentication should succeed ... untested in 0.000s
+    And I should be logged in ... untested in 0.000s
+
+@scenario.end
+--------------------------------------------------------------------------------
+]]>
+</system-out></testcase></testsuite>

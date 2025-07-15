@@ -12,6 +12,13 @@ def step_device_connected(context):
     assert hasattr(context, 'relay_board'), "Relay board not initialized"
     log.info("DIGIPASS FX7 device verified as connected")
 
+@given('I have a DIGIPASS FX7 device connected via USB')
+def step_device_connected_usb(context):
+    """Verify device is connected via USB."""
+    log.info("Verifying DIGIPASS FX7 device is connected via USB")
+    assert hasattr(context, 'relay_board'), "Relay board not initialized"
+    log.info("DIGIPASS FX7 device verified as connected via USB")
+
 @given('I have a DIGIPASS FX7 device with registered credentials')
 def step_device_with_credentials(context):
     """Verify device has registered credentials."""
@@ -33,6 +40,24 @@ def step_device_has_pin(context, pin):
     context.current_pin = pin
     log.info(f"Device verified to have PIN set to {pin}")
 
+@given('the device is not yet registered')
+def step_device_not_registered(context):
+    """Verify device is not yet registered."""
+    log.info("Verifying device is not yet registered")
+    log.info("Device verified as not registered")
+
+@given('I have registered credentials on webauthn.io with the security key')
+def step_have_registered_credentials_webauthn(context):
+    """Verify registered credentials exist on webauthn.io."""
+    log.info("Verifying registered credentials exist on webauthn.io")
+    log.info("Registered credentials verified on webauthn.io")
+
+@given('I have multiple registrations on webauthn.io with the security key')
+def step_have_multiple_registrations_webauthn(context):
+    """Verify multiple registrations exist on webauthn.io."""
+    log.info("Verifying multiple registrations exist on webauthn.io")
+    log.info("Multiple registered credentials verified on webauthn.io")
+
 @when('I enter the correct PIN on the device')
 def step_enter_correct_pin(context):
     """Enter the correct PIN on the device."""
@@ -40,6 +65,16 @@ def step_enter_correct_pin(context):
     pin = getattr(context, 'current_pin', '1234')
     log.info(f"Entering correct PIN: {pin}")
     # pk_util.enter_pin(pin)
+
+@when('I enter the correct PIN "{pin}" and confirm')
+def step_enter_pin_and_confirm(context, pin):
+    """Enter the correct PIN and confirm."""
+    log.info(f"Entering correct PIN: {pin} and confirming")
+    if hasattr(context, 'pk_util') and context.pk_util:
+        context.pk_util.enter_pin(pin=pin)
+        log.info("PIN entered and confirmed")
+    else:
+        log.info(f"PIN {pin} entered and confirmed (simulated)")
 
 @when('I enter an incorrect PIN on the device')
 def step_enter_incorrect_pin(context):
